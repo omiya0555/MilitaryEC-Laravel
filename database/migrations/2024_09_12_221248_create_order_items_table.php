@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // 注文明細ID
+            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // 注文ID
+            $table->foreignId('product_id')->constrained()->onDelete('cascade'); // 商品ID
+            $table->integer('quantity'); // 商品数量
+            $table->decimal('price', 10, 2); // 商品単価
+            $table->timestamps(); // 作成日、更新日
         });
     }
 
