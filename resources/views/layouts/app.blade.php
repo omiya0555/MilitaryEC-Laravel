@@ -21,7 +21,7 @@
             <!-- Page Heading -->
             @include('components.header')
             <!-- Page Content -->
-            <main>
+            <main class="mt-12">
                 {{ $slot }}
             </main>
         </div>
