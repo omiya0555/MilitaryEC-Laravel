@@ -16,7 +16,10 @@ class CartController extends Controller
     // 商品一覧表示
     public function index()
     {
-        $cartItems = Cart::all();
+        $user = Auth::user(); 
+
+        $cartItems = Cart::where('user_id', $user->id)
+        ->get();
     
         return view('carts.index', compact('cartItems'));
     }
@@ -89,9 +92,9 @@ class CartController extends Controller
         $user = Auth::user();
 
         // Begin a database transaction
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
-        // try {
+        try {
             // Create a new order
             $order = Order::create([
                 'user_id'       => $user->id,
@@ -117,16 +120,16 @@ class CartController extends Controller
             // Clear the cart
             Cart::where('user_id', $user->id)->delete();
 
-            // Commit the transaction
-            // DB::commit();
+            //Commit the transaction
+            DB::commit();
 
-            return redirect()->route('cart.index')->with('success', '注文が完了しました！');
+            return redirect()->route('orders.index')->with('success', '注文が完了しました！');
 
-        // } catch (\Exception $e) {
-        //     // Rollback the transaction if something goes wrong
-        //     DB::rollBack();
-        //     return redirect()->route('cart.index')->with('error', '注文処理中にエラーが発生しました。');
-        // }
+        } catch (\Exception $e) {
+            // Rollback the transaction if something goes wrong
+            DB::rollBack();
+            return redirect()->route('cart.index')->with('error', '注文処理中にエラーが発生しました。');
+        }
     }
 
     private function calculateCartTotal($userId)

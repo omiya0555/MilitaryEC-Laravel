@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const quantity = parseInt(row.querySelector('.quantity').innerText);
             
             const price = parseInt(row.querySelector('.price').innerText.replace('円', '').replace(',', ''));
-            totalAmount += price * quantity;
+            totalAmount += price;
         });
 
         // 合計金額を表示
