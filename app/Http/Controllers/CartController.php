@@ -44,33 +44,37 @@ class CartController extends Controller
     }
 
     //　非同期レスポンス json形式で返す
-    //　数量を追加する。
-    public function increase($cartId)
+    public function decrease(Request $request, $cartId)
     {
-        $cartItem = Cart::findOrFail($cartId);
-        $cartItem->quantity += 1;
-        $cartItem->save();
-
-        return response()->json([
-            'success' => true,
-            'quantity' => $cartItem->quantity
-        ]);
-    }
-
-    //　数量を減らす。
-    public function decrease($cartId)
-    {
-        $cartItem = Cart::findOrFail($cartId);
-
-        if ($cartItem->quantity > 1) {
+        $cartItem = Cart::find($cartId);
+        if ($cartItem && $cartItem->quantity > 0) {
             $cartItem->quantity -= 1;
             $cartItem->save();
+    
+            $product = $cartItem->product;
+            return response()->json([
+                'success' => true,
+                'quantity' => $cartItem->quantity,
+                'price' => $product->price * $cartItem->quantity
+            ]);
         }
-
-        return response()->json([
-            'success' => true,
-            'quantity' => $cartItem->quantity
-        ]);
+        return response()->json(['success' => false]);
     }
-
+    
+    public function increase(Request $request, $cartId)
+    {
+        $cartItem = Cart::find($cartId);
+        if ($cartItem) {
+            $cartItem->quantity += 1;
+            $cartItem->save();
+    
+            $product = $cartItem->product;
+            return response()->json([
+                'success' => true,
+                'quantity' => $cartItem->quantity,
+                'price' => $product->price * $cartItem->quantity
+            ]);
+        }
+        return response()->json(['success' => false]);
+    }
 }

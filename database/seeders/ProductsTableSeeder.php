@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'タクティカルバックパック',
                 'description' => 'アウトドアに最適な丈夫で耐久性のあるバックパック。',
-                'price' => 120.50,
+                'price' => 12000,
                 'stock_quantity' => 15,
                 'image_path' => null, // 画像パスはヌルで設定
                 'category_id' => 1, // カテゴリIDは事前に作成しておく
@@ -26,7 +26,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'ミリタリーブーツ',
                 'description' => '長時間使用に耐える高品質なミリタリーブーツ。',
-                'price' => 85.00,
+                'price' => 8500,
                 'stock_quantity' => 30,
                 'image_path' => null, // 画像パスはヌルで設定
                 'category_id' => 1, // カテゴリIDは事前に作成しておく
@@ -36,7 +36,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'カモフラージュジャケット',
                 'description' => '快適で軽量なカモフラージュジャケット。',
-                'price' => 65.75,
+                'price' => 6500,
                 'stock_quantity' => 20,
                 'image_path' => null, // 画像パスはヌルで設定
                 'category_id' => 2, // カテゴリIDは事前に作成しておく
@@ -46,7 +46,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'タクティカルフラッシュライト',
                 'description' => '複数のモードを備えた明るく信頼性の高いフラッシュライト。',
-                'price' => 45.99,
+                'price' => 4500,
                 'stock_quantity' => 50,
                 'image_path' => null, // 画像パスはヌルで設定
                 'category_id' => 3, // カテゴリIDは事前に作成しておく

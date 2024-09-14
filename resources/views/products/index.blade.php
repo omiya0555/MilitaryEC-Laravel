@@ -18,7 +18,7 @@
     <hr class="mt-12 p-2"/>
     
     <!-- New Products -->
-    <p class="flex justify-center text-gray-700 mt-20 p-5">N E W</p>
+    <p class="flex justify-center text-gray-700 mt-12 p-5">N E W</p>
     <div class="flex flex-wrap justify-center text-center gap-4 m-4 p-4">
         @foreach($products as $product)
             <div class="w-64 rounded overflow-hidden shadow-lg">

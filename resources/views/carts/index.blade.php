@@ -12,13 +12,13 @@
                 $cart_amount += $cart->product->price * $cart->quantity;
             }
             ?>
-            <span class="text-xl m-auto mr-4">合計金額 : {{ $cart_amount }}円</span>
+            <span class="text-xl m-auto mr-4" id="total-amount">合計金額 : {{ $cart_amount }}円</span>
             <button type="submit" class="border border-green-500 bg-green-500 hover:bg-green-700 text-lg" style="width:140px; height:50px; ">購入</button>
         </div>
     </form>
 
     <!-- Cart Table -->
-    <div class="flex justify-center m-6">
+    <div class="flex justify-center m-16">
         <table class="table-auto w-full border-collapse text-left mt-6">
             <thead>
                 <tr class="bg-gray-100 border-b">
@@ -50,7 +50,7 @@
                             </button>
 
                             <!-- 数量表示 -->
-                            <span class="text-gray-800" id="quantity-{{ $cart->id }}">{{$cart->quantity}}</span>
+                            <span class="text-gray-800 quantity" id="quantity-{{ $cart->id }}">{{$cart->quantity}}</span>
 
                             <!-- 増やすボタン -->
                             <button type="button" class="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded increase-btn" data-id="{{ $cart->id }}">
@@ -62,7 +62,9 @@
                     </td>
                     
                     
-                    <td class="p-4 font-semibold text-gray-800">¥{{$cart->product->price * $cart->quantity}}</td>
+                    <td class="p-4 text-gray-800 price" id="price-{{ $cart->id }}">
+                        {{ $cart->product->price * $cart->quantity }}円
+                    </td>                    
                     <td class="p-4">
                         <form action="" method="POST">
                             @csrf
