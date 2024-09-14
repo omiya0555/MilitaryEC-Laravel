@@ -15,11 +15,14 @@
                 </div>
                 <div class=" flex justify-between p-4">
                     <span class="bg-gray-200 w-24 h-10 flex justify-center items-center text-sm  text-gray-700">{{ $product->price }}</span>
-                    <button type="button" submit="{{route('products.index')}}" class="w-24 h-10 flex justify-center items-center border border-green-600 bg-green-700 hover:bg-green-800">
-                        <span class="text-white items-center">
-                            Add Item
-                        </span>
-                    </button>
+                    <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                    @csrf
+                        <button type="submit" class="w-24 h-10 flex justify-center items-center border border-green-600 bg-green-700 hover:bg-green-800">
+                            <span class="text-white items-center">
+                                Add Item
+                            </span>
+                        </button>
+                    </form>
                 </div>
             </div>
         @endforeach

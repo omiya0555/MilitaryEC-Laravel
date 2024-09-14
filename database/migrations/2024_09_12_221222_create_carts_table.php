@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id(); // カートID
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // ユーザーID
+            $table->foreignId('product_id')->constrained()->onDelete('cascade'); // 商品ID
+            $table->integer('quantity'); // 商品数量
             $table->decimal('total_amount', 10, 2)->default(0); // 合計金額
             $table->timestamps(); // 作成日、更新日
         });
