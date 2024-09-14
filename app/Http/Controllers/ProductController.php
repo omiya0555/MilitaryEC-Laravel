@@ -10,7 +10,8 @@ class ProductController extends Controller
     // 商品一覧表示
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->get();
+
         return view('products.index', compact('products'));
     }
 

@@ -19,6 +19,7 @@ class CartController extends Controller
         $user = Auth::user(); 
 
         $cartItems = Cart::where('user_id', $user->id)
+        ->orderBy('created_at', 'desc')
         ->get();
     
         return view('carts.index', compact('cartItems'));
