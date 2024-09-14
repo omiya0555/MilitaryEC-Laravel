@@ -1,12 +1,13 @@
 <x-app-layout>
 
     <!-- PopUp -->
+    <!-- 商品がカートに追加されたときのみ表示　-->
     @if (session('success'))
         <div id="popup" class="fixed inset-0 z-10 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-md w-full">
                 <h2 class="text-2xl font-bold text-green-600 mb-4">カートに商品を追加しました！</h2>
                 <p class="text-gray-700 mb-6">商品がカートに追加されました。</p>
-                <a href="{{ route('products.index') }}" class="text-blue-600 font-semibold hover:underline">カートを見に行く</a>
+                <a href="{{ route('cart.index') }}" class="text-blue-600 font-semibold hover:underline">カートを見に行く</a>
             </div>
         </div>
     @endif

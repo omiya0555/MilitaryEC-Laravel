@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    // 商品一覧表示
+    public function index()
+    {
+        $carts = Cart::all();
+        return view('carts.index', compact('carts'));
+    }
+
+    // 商品をカートに追加
     public function store(Request $request, $productId)
     {
         $user = Auth::user();
