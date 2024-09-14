@@ -12,8 +12,8 @@ class CartController extends Controller
     // 商品一覧表示
     public function index()
     {
-        $carts = Cart::all();
-        return view('carts.index', compact('carts'));
+        $cartItems = Cart::all();
+        return view('carts.index', compact('cartItems'));
     }
 
     // 商品をカートに追加
@@ -42,4 +42,35 @@ class CartController extends Controller
 
         return redirect()->route('products.index')->with('success','カートにアイテムを追加しました！');
     }
+
+    //　非同期レスポンス json形式で返す
+    //　数量を追加する。
+    public function increase($cartId)
+    {
+        $cartItem = Cart::findOrFail($cartId);
+        $cartItem->quantity += 1;
+        $cartItem->save();
+
+        return response()->json([
+            'success' => true,
+            'quantity' => $cartItem->quantity
+        ]);
+    }
+
+    //　数量を減らす。
+    public function decrease($cartId)
+    {
+        $cartItem = Cart::findOrFail($cartId);
+
+        if ($cartItem->quantity > 1) {
+            $cartItem->quantity -= 1;
+            $cartItem->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'quantity' => $cartItem->quantity
+        ]);
+    }
+
 }

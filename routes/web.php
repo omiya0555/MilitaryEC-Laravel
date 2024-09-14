@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     //carts
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{productId}', [CartController::class, 'store'])->name('cart.store');
+    //carts quantity
+    Route::post('/cart/{cart}/increase', [CartController::class, 'increase'])->name('cart.increase');
+    Route::post('/cart/{cart}/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
     
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
