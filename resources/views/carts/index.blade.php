@@ -1,6 +1,10 @@
 <x-app-layout>
     <script src="js/cart.js"></script>
     <p class="flex justify-center text-gray-700 mt-12 p-5">C A R T</p>
+    
+    <!-- flash message -->
+    @include('components/flash')
+
     <form action="" method="POST" class="flex justify-center mb-2">
         @csrf
         <div class="flex justify-center">

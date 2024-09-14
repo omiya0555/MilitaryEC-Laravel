@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -13,6 +17,7 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = Cart::all();
+    
         return view('carts.index', compact('cartItems'));
     }
 
@@ -76,5 +81,63 @@ class CartController extends Controller
             ]);
         }
         return response()->json(['success' => false]);
+    }
+
+    //カートの商品を購入する処理
+    public function purchase(Request $request)
+    {
+        $user = Auth::user();
+
+        // Begin a database transaction
+        // DB::beginTransaction();
+
+        // try {
+            // Create a new order
+            $order = Order::create([
+                'user_id'       => $user->id,
+                'total_amount'  => $this->calculateCartTotal($user->id),
+            ]);
+
+            // Retrieve all cart items for the user
+            $cartItems = Cart::where('user_id', $user->id)->get();
+
+            foreach ($cartItems as $cartItem) {
+                // Create an order item record
+                OrderItem::create([
+                    'order_id'      => $order->id,
+                    'product_id'    => $cartItem->product_id,
+                    'quantity'      => $cartItem->quantity,
+                    'name'          => $cartItem->product->name,
+                    'description'   => $cartItem->product->description,
+                    'image_path'    => $cartItem->product->image_path,
+                    'price'         => $cartItem->product->price,
+                ]);
+            }
+
+            // Clear the cart
+            Cart::where('user_id', $user->id)->delete();
+
+            // Commit the transaction
+            // DB::commit();
+
+            return redirect()->route('cart.index')->with('success', '注文が完了しました！');
+
+        // } catch (\Exception $e) {
+        //     // Rollback the transaction if something goes wrong
+        //     DB::rollBack();
+        //     return redirect()->route('cart.index')->with('error', '注文処理中にエラーが発生しました。');
+        // }
+    }
+
+    private function calculateCartTotal($userId)
+    {
+        $cartItems = Cart::where('user_id', $userId)->get();
+        $totalAmount = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $totalAmount += $cartItem->product->price * $cartItem->quantity;
+        }
+
+        return $totalAmount;
     }
 }

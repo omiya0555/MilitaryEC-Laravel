@@ -16,6 +16,10 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade'); // 注文ID
             $table->foreignId('product_id')->constrained()->onDelete('cascade'); // 商品ID
             $table->integer('quantity'); // 商品数量
+
+            $table->string('name'); //商品名
+            $table->text('description'); // 商品説明
+            $table->string('image_path'); // 画像パス
             $table->decimal('price', 10, 2); // 商品単価
             $table->timestamps(); // 作成日、更新日
         });
