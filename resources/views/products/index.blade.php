@@ -1,17 +1,11 @@
 <x-app-layout>
-
-    <h1 class="d-flex justify-content-center mt-12">商品一覧</h1>
-
-
-
-    <!-- スライドショーの表示 -->
     <x-slider></x-slider>
-
+    <hr class="mt-12 p-2"/>
+    <p class="flex justify-center text-gray-700 mt-20 p-5">N E W</p>
 
     <div class="flex flex-wrap justify-center text-center gap-4 m-4 p-4">
-
         @foreach($products as $product)
-            <div class=" w-64 rounded overflow-hidden shadow-lg">
+            <div class="w-64 rounded overflow-hidden shadow-lg">
                 <img src="{{ $product->image_path }}" style="width:100%; height:200px;">
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">{{ $product->name }}</div>
@@ -19,13 +13,15 @@
                         {{ $product->description }}
                     </p>
                 </div>
-                <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{$product->price}}</span>
-                    <span class="inline-block bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">add to cart</span>
+                <div class=" flex justify-between p-4">
+                    <span class="bg-gray-200 w-24 h-10 flex justify-center items-center text-sm  text-gray-700">{{ $product->price }}</span>
+                    <button type="button" submit="{{route('products.index')}}" class="w-24 h-10 flex justify-center items-center border border-green-600 bg-green-700 hover:bg-green-800">
+                        <span class="text-white items-center">
+                            Add Item
+                        </span>
+                    </button>
                 </div>
             </div>
         @endforeach
-
     </div>
-
 </x-app-layout>

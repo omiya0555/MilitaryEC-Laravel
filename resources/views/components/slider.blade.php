@@ -1,6 +1,7 @@
+<p class="flex justify-center text-gray-700 mt-12 p-5">PICK UP</p>
 <div x-data="{ currentSlide: 0, slides: ['logo-laravel-1024.png', 'logo-laravel-1024.png', 'logo-laravel-1024.png'], interval: 7000 }" 
      x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, interval)"
-     class="relative w-full h-80 overflow-hidden">
+     class="relative w-full overflow-hidden" style="height: 700px;">
     
     <!-- Slides -->
     <template x-for="(slide, index) in slides" :key="index">
