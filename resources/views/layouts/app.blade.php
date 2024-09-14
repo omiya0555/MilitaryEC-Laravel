@@ -17,13 +17,19 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+
+        <!-- Page Heading -->
+        @include('components.header')
+
         <div class="min-h-screen bg-gray-100">
-            <!-- Page Heading -->
-            @include('components.header')
             <!-- Page Content -->
-            <main class="mt-12">
+            <main class="m-3">
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Page Footing -->
+        @include('components.footer')
+
     </body>
 </html>
