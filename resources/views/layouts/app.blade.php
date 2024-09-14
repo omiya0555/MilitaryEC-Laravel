@@ -21,9 +21,7 @@
         <!-- Page Heading -->
         @include('components.header')
 
-
-
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             <!-- Page Content -->
             <main class="m-3">
                 {{ $slot }}
