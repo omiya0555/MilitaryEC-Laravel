@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id(); // 注文ID
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // ユーザーID
-            $table->decimal('total_amount', 10, 2); // 合計金額
+            $table->decimal('total_amount', 10, 0); // 合計金額
             $table->text('shipping_address')->nullable(); // 配送先住所
             $table->string('status')->default('pending'); // 注文ステータス
             $table->timestamps(); // 作成日、更新日

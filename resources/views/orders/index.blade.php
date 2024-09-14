@@ -3,6 +3,7 @@
         @if($orders->isEmpty())
             <p class="text-center text-gray-500">購入履歴がありません。</p>
         @else
+        <p class="flex justify-center text-gray-700 p-5">O R D E R S</p>
         <div class="overflow-x-auto">
             <table class="min-w-full table-auto bg-white shadow-lg rounded-lg">
                 <thead>
@@ -36,17 +37,17 @@
                                                 <td class="px-4 py-2 text-gray-700">{{ $item->name }}</td>
                                                 <td class="px-4 py-2 text-gray-900">{{ (int)$item->price }}円</td>
                                                 <td class="px-4 py-2">
-                                                    @switch($item->status)
+                                                    @switch($order->status)
                                                         @case('pending')
                                                             <span class="text-yellow-600">未配送</span>
                                                             @break
-                                                        @case(2)
+                                                        @case('test')
                                                             <span class="text-blue-600">配送中</span>
                                                             @break
-                                                        @case(3)
+                                                        @case('test')
                                                             <span class="text-green-600">配送済</span>
                                                             @break
-                                                        @case(4)
+                                                        @case('test')
                                                             <span class="text-red-600">キャンセル</span>
                                                             @break
                                                         @default

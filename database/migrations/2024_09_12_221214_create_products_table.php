@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); //商品名
             $table->text('description')->nullable(); // 商品説明
-            $table->decimal('price', 10, 2); // 価格
+            $table->decimal('price', 10, 0); // 価格
             $table->integer('stock_quantity'); // 在庫数
             $table->string('image_path')->nullable(); // 画像パス
             $table->foreignId('category_id')->constrained()->onDelete('cascade'); // カテゴリID

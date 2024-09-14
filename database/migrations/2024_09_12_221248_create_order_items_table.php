@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name'); //商品名
             $table->text('description'); // 商品説明
             $table->string('image_path'); // 画像パス
-            $table->decimal('price', 10, 2); // 商品単価
+            $table->decimal('price', 10, 0); // 商品単価
             $table->timestamps(); // 作成日、更新日
         });
     }
