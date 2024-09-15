@@ -14,8 +14,6 @@
 
     <!-- Slider -->
     <x-slider></x-slider>
-
-    <hr class="mt-12 p-2"/>
     
     <!-- New Products -->
     <p class="flex justify-center text-gray-700 mt-6 p-5">N E W</p>
