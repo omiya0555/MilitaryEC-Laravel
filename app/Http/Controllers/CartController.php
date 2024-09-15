@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    public function boot()
+    {
+        View::composer('*', function ($view) {
+            $cartItemCount = 0;
+            if (Auth::check()) {
+                $cartItemCount = Cart::where('user_id', Auth::id())->sum('quantity');
+            }
+            $view->with('cartItemCount', $cartItemCount);
+        });
+    }
+
     // 商品一覧表示
     public function index()
     {
@@ -143,5 +154,13 @@ class CartController extends Controller
         }
 
         return $totalAmount;
+    }
+
+    public function getCartCount()
+    {
+        $user = Auth::user();
+        $cartItemCount = Cart::where('user_id', $user->id)->sum('quantity');
+    
+        return response()->json(['count' => $cartItemCount]);
     }
 }
