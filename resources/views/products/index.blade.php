@@ -48,7 +48,7 @@
 
     <!-- New Products -->
     <p class="flex justify-center text-gray-700 mt-6 p-5">P R O D U C T S</p>
-    <div class="flex flex-wrap justify-center text-center gap-4 m-4 p-4">
+    <div class="flex flex-wrap justify-center text-center gap-8 m-4 p-4 width: 50%;">
         @foreach($products as $product)
             <div class=" w-52 rounded overflow-hidden shadow-lg">
                 <img src="{{ $product->image_path }}" style="width:auto; height:200px;">
