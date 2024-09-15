@@ -1,7 +1,7 @@
 <p class="flex justify-center text-gray-700 mt-12 p-5">PICK UP</p>
 <div x-data="{ currentSlide: 0, slides: ['my_gear.png', 'logo-laravel-1024.png', 'logo-laravel-1024.png'], interval: 7000 }" 
      x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, interval)"
-     class="relative w-full overflow-hidden" style="margin: auto; max-width: 900px; height: 600px;">
+     class="relative w-full overflow-hidden" style="margin: auto; max-width: 1500px; height: calc(100vh - 100px);">
     
     <!-- Slides -->
     <template x-for="(slide, index) in slides" :key="index">
@@ -13,7 +13,7 @@
              x-transition:leave="transition ease-in duration-500"
              x-transition:leave-start="opacity-100 scale-100"
              x-transition:leave-end="opacity-0 scale-95">
-            <img :src="slide" alt="Slide" class="w-full h-full object-cover">
+            <img :src="slide" alt="Slide" class="w-full h-full object-contain">
         </div>
     </template>
 
@@ -25,4 +25,4 @@
                     class="w-4 h-4 rounded-full"></button>
         </template>
     </div>
-</div>
+</div
