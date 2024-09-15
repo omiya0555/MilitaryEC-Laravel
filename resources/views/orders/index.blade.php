@@ -31,6 +31,7 @@
                                             <th class="px-4 py-2">画像</th>
                                             <th class="px-4 py-2">商品名</th>
                                             <th class="px-4 py-2">価格</th>
+                                            <th class="px-4 py-2">個数</th>
                                             <th class="px-4 py-2">配送状況</th>
                                         </tr>
                                     </thead>
@@ -41,7 +42,8 @@
                                                     <img src="{{ $item->image_path }}" alt="{{ $item->name }}" class="w-20 h-20 object-cover rounded-md">
                                                 </td>
                                                 <td class="px-4 py-2 text-gray-700">{{ $item->name }}</td>
-                                                <td class="px-4 py-2 text-gray-900">{{ (int)$item->price }}円</td>
+                                                <td class="px-4 py-2 text-gray-900">{{ number_format($item->price) }}円</td>
+                                                <td class="px-4 py-2 text-gray-900">{{ $item->quantity }}</td>
                                                 <td class="px-4 py-2">
                                                     @switch($order->status)
                                                         @case('pending')
