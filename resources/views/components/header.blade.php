@@ -1,4 +1,5 @@
 <header class="bg-white shadow-md py-2 px-6 fixed top-0 left-0 right-0 z-50">
+  
     <div class="container mx-auto flex justify-between items-center">
         <!-- 左側：サイトタイトル -->
         <a href="{{ route('products.index') }}">

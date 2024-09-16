@@ -8,7 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('tbody tr').forEach(row => {
             const quantity = parseInt(row.querySelector('.quantity').innerText);
             const price = parseInt(row.querySelector('.price').innerText.replace('円', '').replace(',', ''));
-            totalAmount += price;  // 数量を考慮して合計を計算
+            totalAmount += price;  
+
+            // 数量が1の場合、減らすボタンを無効化
+            const decreaseButton = row.querySelector('.decrease-btn');
+            if (quantity <= 1) {
+                decreaseButton.disabled = true;
+            } else {
+                decreaseButton.disabled = false;
+            }
         });
 
         // 合計金額を表示
