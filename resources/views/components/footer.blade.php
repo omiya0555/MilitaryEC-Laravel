@@ -1,10 +1,10 @@
-<footer class="bg-white shadow-md p-6">
+<footer class="bg-gray-200 shadow-md p-2">
     <div class="container mx-auto flex justify-between items-center">
         <!-- 左側：サイトタイトル -->
         <div class="text-2xl font-semibold text-gray-800">
-            <span style="color: rgb(160,217,219); color: linear-gradient(90deg, rgba(160,217,219,1) 0%, rgba(97,246,203,1) 0%, rgba(1,126,66,1) 100%);">
-                TOP
-            </span>
+            <a href="{{ route('products.index') }}" class="text-gray-700 text-base">
+                TOPへ戻る
+            </a>
         </div>
         <!-- 右側：アイコン -->
         <div class="flex space-x-4">

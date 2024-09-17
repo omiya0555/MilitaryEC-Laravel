@@ -16,14 +16,17 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased" style="padding: 0 20%;">
+    <body class="font-sans antialiased">
 
         <!-- Page Heading -->
         @include('components.header')
 
+        
+
         <div class="min-h-screen">
+
             <!-- Page Content -->
-            <main class="m-6">
+            <main></main>
                 {{ $slot }}
             </main>
         </div>

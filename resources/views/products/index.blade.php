@@ -1,5 +1,14 @@
 <x-app-layout>
-    <div class="m-7">
+
+    <!-- image -->
+    <img src="background.png" style="
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+        "></img>
+
+    <div class="m-7" style="padding: 0 15%;">
         <!-- PopUp -->
         <!-- 商品がカートに追加されたときのみ表示　-->
         @if (session('success'))
@@ -12,12 +21,10 @@
             </div>
         @endif
 
-        <!-- Slider -->
-        <!-- <x-slider></x-slider> -->
-        
+
         <!-- New Products -->
         <p class="flex justify-center text-gray-700 mt-6 p-5">N E W</p>
-        <div class="flex flex-wrap justify-center text-center gap-4 m-4 p-4">
+        <div class="flex flex-wrap justify-center text-center gap-8 m-4 p-4">
             @foreach($products->slice(0, 3) as $product) <!-- 最初の3の商品を取得 -->
                 <div class="w-44 rounded overflow-hidden shadow-lg">
                     <img src="{{ $product->image_path }}" style="width:175px;">
@@ -28,7 +35,7 @@
                         </p>
                     </div>
                     <div class="flex justify-between p-2">
-                        <span class="bg-gray-200 w-15 h-10 flex justify-center items-center text-sm  text-gray-700">{{ (int)$product->price }}円</span>
+                        <span class="bg-gray-200 w-15 h-10 p-1 flex justify-center items-center text-sm  text-gray-700">{{ (int)$product->price }}円</span>
                         <form action="{{ route('cart.store', $product->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="w-15 h-10 flex justify-center items-center border border-green-500 bg-green-500 hover:bg-green-700">
@@ -46,7 +53,7 @@
 
         <!-- New Products -->
         <p class="flex justify-center text-gray-700 mt-6 p-5">P R O D U C T S</p>
-        <div class="flex flex-wrap justify-center text-center gap-4 m-4 p-4">
+        <div class="flex flex-wrap justify-center text-center gap-8 m-4 p-4">
             @foreach($products as $product)
                 <div class=" w-44 rounded overflow-hidden shadow-lg">
                 <img src="{{ $product->image_path }}" style="width:175px;">
