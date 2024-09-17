@@ -37,11 +37,16 @@ Route::middleware('auth')->group(function () {
     //carts
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{productId}', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart/{productId}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/cart', [CartController::class, 'purchase'])->name('cart.purchase');
     //carts quantity
     Route::post('/cart/{cart}/increase', [CartController::class, 'increase'])->name('cart.increase');
     Route::post('/cart/{cart}/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
     Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
+    
+    // カートに商品を追加するルート
+    Route::post('/cart/{product}/add', [CartController::class, 'add'])->name('cart.add');
+    
     //orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index')->middleware('auth');
     

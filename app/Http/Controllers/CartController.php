@@ -63,6 +63,21 @@ class CartController extends Controller
         return redirect()->route('products.index')->with('success','カートにアイテムを追加しました！');
     }
 
+    // 商品をカートから削除
+    public function destroy(Request $request, $productId)
+    {
+        $user = Auth::user();
+
+        //すでに商品がカートに存在するか確認
+        $cartItem = Cart::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->firstOrFail();
+
+        $cartItem->delete();
+
+        return redirect()->route('cart.index')->with('success','カートにアイテムを削除しました！');
+    }
+
     //　非同期レスポンス json形式で返す
     public function decrease(Request $request, $cartId)
     {
@@ -163,4 +178,61 @@ class CartController extends Controller
     
         return response()->json(['count' => $cartItemCount]);
     }
+
+    // カートに商品を追加する
+    public function addToCart(Request $request, Product $product)
+    {
+        // バリデーション（リクエストのproduct_idが存在するか確認）
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        // カートに商品を追加または更新（すでに存在する場合は数量を増加）
+        $cartItem = Cart::updateOrCreate(
+            [
+                'user_id' => auth()->id(),
+                'product_id' => $product->id,
+            ],
+            [
+                'quantity' => \DB::raw('quantity + 1'),
+            ]
+        );
+
+        // 成功メッセージを返す（JSON形式）
+        return response()->json(['success' => true, 'message' => '商品がカートに追加されました']);
+    }
+
+    public function add(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $user = Auth::user();
+
+        //すでに商品がカートに存在するか確認
+        $cartItem = Cart::where('user_id', $user->id)
+            ->where('product_id', $id)
+            ->first();
+            
+        if($cartItem){
+            //すでに商品がカートに存在するなら数量を追加
+            $cartItem->quantity += 1;
+            $cartItem->save();
+        
+        }else{
+            //存在しないならカラムを作成
+            Cart::create([
+                'user_id'       => $user->id,
+                'product_id'    => $id,
+                'quantity'      => 1,
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'product' => [
+                'name' => $product->name,
+                'image_path' => $product->image_path
+            ]
+        ]);
+    }
+
 }

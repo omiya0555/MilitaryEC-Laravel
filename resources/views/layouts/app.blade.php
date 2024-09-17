@@ -26,7 +26,7 @@
         <div class="min-h-screen">
 
             <!-- Page Content -->
-            <main></main>
+            <main>
                 {{ $slot }}
             </main>
         </div>

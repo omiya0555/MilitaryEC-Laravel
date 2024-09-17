@@ -76,8 +76,9 @@
                         {{ $cart->product->price * $cart->quantity }}円
                     </td>                    
                     <td class="p-4">
-                        <form action="" method="POST">
+                        <form action="{{ route('cart.destroy', ['productId' => $cart->product->id] ) }}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <input type="hidden" name="cart_id" value="{{ $cart->id }}">
                             <button type="submit" class="px-4 py-2 text-gray-800 bg-gray-200 rounded hover:bg-gray-300 transition duration-200">
                                 戻す
