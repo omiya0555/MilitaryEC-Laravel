@@ -73,6 +73,15 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- ページネーションリンク -->
+        <div class="mt-6">
+            {{ $orders->links() }}
+        </div>
+        
         @endif
+
     </div>
+
+
 </x-app-layout>

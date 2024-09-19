@@ -66,6 +66,12 @@
                 </div>
             @endforeach
         </div>
+
+        <!-- ページネーションリンク -->
+        <div class="mt-6">
+            {{ $products->links() }}
+        </div>
+
     </div>
 
     <!-- JavaScript -->

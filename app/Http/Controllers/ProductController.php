@@ -10,7 +10,7 @@ class ProductController extends Controller
     // 商品一覧表示
     public function index()
     {
-        $products = Product::orderBy('created_at', 'desc')->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(10);
 
         return view('products.index', compact('products'));
     }
