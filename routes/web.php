@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+
+use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +27,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+// Google認証を開始するルート
+Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle'])->name('auth.google');
 
+// Google認証後のコールバックルート
+Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
+
+Route::middleware('auth')->group(function () {
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
