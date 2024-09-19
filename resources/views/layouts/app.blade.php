@@ -22,11 +22,7 @@
         <!-- Page Heading -->
         @include('components.header')
 
-        
-
         <div class="min-h-screen">
-
-            <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>

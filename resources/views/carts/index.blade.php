@@ -14,14 +14,7 @@
     <form action="" method="POST" class="flex justify-center mb-2">
         @csrf
         <div class="flex justify-center">
-            <?php
-            //合計金額を求める
-            $cart_amount = 0;
-            foreach($cartItems as $cart)
-            {
-                $cart_amount += $cart->product->price * $cart->quantity;
-            }
-            ?>
+            <?php $cart_amount = 0; ?>
             <span class="text-xl m-auto mr-4" id="total-amount">合計金額 : {{ $cart_amount }}円</span>
             <button type="submit" class="border border-green-500 bg-green-500 hover:bg-green-700 text-lg" style="width:140px; height:50px; ">購入</button>
         </div>
@@ -29,7 +22,8 @@
 
     <!-- Cart Table -->
     <div class="flex justify-center m-16">
-        <table class="table-auto w-full border-collapse text-left mt-6">
+        <table class="table-auto w-full border-collapse text-left mt-6"
+               style="min-width: 650px;">
             <thead>
                 <tr class="bg-gray-100 border-b">
                     <th class="p-4 text-gray-600">画像</th>
@@ -73,14 +67,14 @@
                     
                     
                     <td class="p-4 text-gray-800 price" id="price-{{ $cart->id }}">
-                        {{ $cart->product->price * $cart->quantity }}円
+                        {{ $cart->product->price * $cart->quantity }}<span class=" text-xs">円</span>
                     </td>                    
                     <td class="p-4">
                         <form action="{{ route('cart.destroy', ['productId' => $cart->product->id] ) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="cart_id" value="{{ $cart->id }}">
-                            <button type="submit" class="px-4 py-2 text-gray-800 bg-gray-200 rounded hover:bg-gray-300 transition duration-200">
+                            <button type="submit" class="p-2 text-gray-800 bg-gray-200 rounded hover:bg-gray-300 transition duration-200">
                                 戻す
                             </button>
                         </form>

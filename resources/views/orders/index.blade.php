@@ -10,13 +10,14 @@
         <!-- flash message -->
         @include('components/flash')
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full table-auto bg-white shadow-lg rounded-lg">
+        <div class="flex justify-center m-2">
+            <table class="table-auto w-full bg-white shadow-lg rounded-lg"
+                   style="min-width: 700px;">
                 <thead>
                     <tr class="bg-gray-800 text-white text-left">
                         <th class="px-2 py-3">日時</th>
                         <th class="px-2 py-3">合計金額</th>
-                        <th class="px-2 py-3 w-3/5">購入商品</th>
+                        <th class="px-2 py-3">購入商品</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
