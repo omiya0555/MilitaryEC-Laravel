@@ -28,7 +28,7 @@
                     </a>
                     <div class="px-2 py-2">
                         <div class="font-bold mb-2">{{ $product->name }}</div>
-                        <p class="text-gray-700 text-sm">
+                        <p class="text-gray-700 text-sm h-9">
                             {{ $product->description }}
                         </p>
                     </div>
@@ -53,7 +53,7 @@
                     </a>
                     <div class="px-2 py-2">
                         <div class="font-bold mb-2">{{ $product->name }}</div>
-                        <p class="text-gray-700 text-sm">
+                        <p class="text-gray-700 text-sm h-9">
                             {{ $product->description }}
                         </p>
                     </div>
