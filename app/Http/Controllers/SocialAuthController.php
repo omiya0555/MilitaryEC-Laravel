@@ -38,6 +38,6 @@ class SocialAuthController extends Controller
         Auth::login($user);
 
         // ホーム画面にリダイレクト
-        return redirect('/sample');
+        return redirect('/products');
     }
 }
