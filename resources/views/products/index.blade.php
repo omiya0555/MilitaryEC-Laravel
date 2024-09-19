@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <!-- image -->
-    <img src="background.png" style="background-size: cover; background-position: center; width: 100%; height: 100%;"></img>
+    <img src="background.png" style="margin-top:12px; background-size: cover; background-position: center; width: 100%; height: 100%;"></img>
 
     <div class="m-7" style="padding: 0 15%;">
 
