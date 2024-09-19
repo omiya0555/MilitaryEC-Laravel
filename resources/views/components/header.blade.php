@@ -1,5 +1,5 @@
 <header class="bg-white shadow-md py-2 px-6 fixed top-0 left-0 right-0 z-50">
-  
+
     <div class="container mx-auto flex justify-between items-center">
         <!-- 左側：サイトタイトル -->
         <a href="{{ route('products.index') }}">
@@ -60,6 +60,21 @@
                         document.getElementById('logout-form').submit(); // 「はい」が押されたらログアウトフォームを送信
                     }
                 }
+                document.addEventListener('DOMContentLoaded', function () {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                // カート数の更新
+                function updateCartCount() {
+                    fetch('/cart/count')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('cart-count').innerText = data.count;
+                        });
+                }
+
+                // ページロード時にカート数を設定
+                updateCartCount();
+            });
             </script>
         </div>
     </div>

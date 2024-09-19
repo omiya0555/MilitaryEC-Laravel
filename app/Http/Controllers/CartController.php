@@ -207,6 +207,9 @@ class CartController extends Controller
         $product = Product::find($id);
         $user = Auth::user();
 
+        $cartItemCount = Cart::where('user_id', $user->id)->sum('quantity');
+        
+
         //すでに商品がカートに存在するか確認
         $cartItem = Cart::where('user_id', $user->id)
             ->where('product_id', $id)
@@ -230,7 +233,8 @@ class CartController extends Controller
             'success' => true,
             'product' => [
                 'name' => $product->name,
-                'image_path' => $product->image_path
+                'image_path' => $product->image_path,
+                'cart_item_count' => $cartItemCount
             ]
         ]);
     }

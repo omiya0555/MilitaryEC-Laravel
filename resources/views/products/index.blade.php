@@ -75,38 +75,45 @@
 
         // カートに追加ボタンのクリックイベント
         document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function () {
-            const productId = this.dataset.id;
+            button.addEventListener('click', function () {
+                const productId = this.dataset.id;
 
-            // Ajaxリクエストを送信
-            fetch(`/cart/${productId}/add`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ product_id: productId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // 商品の画像と名前をポップアップに表示
-                    popupImage.src = data.product.image_path;
-                    popupProductName.textContent = data.product.name;
+                // Ajaxリクエストを送信
+                fetch(`/cart/${productId}/add`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ product_id: productId }),
+                })
+                .then(response => response.json())
 
-                    // ポップアップを表示
-                    popup.classList.remove('hidden');
-                    setTimeout(() => {
-                        popup.classList.add('hidden');
-                    }, 3000); // 3秒後に自動で非表示
-                }
+                .then(data => {
+                    if (data.success) {
+                        // 商品の画像と名前をポップアップに表示
+                        popupImage.src = data.product.image_path;
+                        popupProductName.textContent = data.product.name;
+                        if(data.product.cart_item_count === 0 ){
+                            document.getElementById('cart-count').innerText = 1;
+                        }else{
+                            document.getElementById('cart-count').innerText = Number(data.product.cart_item_count) + 1;
+                        }
+                        console.log(data.product.cart_item_count);
+
+                        // ポップアップを表示
+                        popup.classList.remove('hidden');
+                        setTimeout(() => {
+                            popup.classList.add('hidden');
+                        }, 3000); // 3秒後に自動で非表示
+                    }
+                });
             });
+        });
+        // ✕ボタンでポップアップを閉じる
+        popupCloseButton.addEventListener('click', function () {
+            popup.classList.add('hidden');
         });
     });
-            // ✕ボタンでポップアップを閉じる
-            popupCloseButton.addEventListener('click', function () {
-                popup.classList.add('hidden');
-            });
-        });
     </script>
 </x-app-layout>
