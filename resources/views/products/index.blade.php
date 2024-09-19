@@ -23,7 +23,9 @@
         <div class="flex flex-wrap justify-center text-center gap-8 m-4 p-4">
             @foreach($products->slice(0, 3) as $product)
                 <div class="w-44 rounded overflow-hidden shadow-lg">
-                    <img src="{{ $product->image_path }}" style="width:175px;">
+                    <a href="{{ route('products.show',$product->id ) }}">
+                        <img src="{{ $product->image_path }}" style="width:175px;">
+                    </a>
                     <div class="px-2 py-2">
                         <div class="font-bold mb-2">{{ $product->name }}</div>
                         <p class="text-gray-700 text-sm">
@@ -46,7 +48,9 @@
         <div class="flex flex-wrap justify-center text-center gap-8 m-4 p-4">
             @foreach($products as $product)
                 <div class="w-44 rounded overflow-hidden shadow-lg">
-                    <img src="{{ $product->image_path }}" style="width:175px;">
+                    <a href="{{ route('products.show',$product->id)}}" >
+                        <img src="{{ $product->image_path }}" style="width:175px;">
+                    </a>
                     <div class="px-2 py-2">
                         <div class="font-bold mb-2">{{ $product->name }}</div>
                         <p class="text-gray-700 text-sm">

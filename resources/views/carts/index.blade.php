@@ -38,7 +38,9 @@
             @foreach($cartItems as $cart)
                 <tr class="border-b hover:bg-gray-50 transition duration-200 ease-in-out">
                     <td class="p-4">
+                    <a href="{{ route('products.show',$cart->product->id)}}" >
                         <img src="{{$cart->product->image_path}}" alt="{{$cart->product->title}}" class="w-24 h-24 object-cover rounded">
+                    </a>
                     </td>
                     <td class="p-4 font-medium text-gray-800">{{$cart->product->name}}</td>
                     <td class="p-4 text-gray-600">{{$cart->product->description}}</td>
