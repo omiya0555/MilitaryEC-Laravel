@@ -18,12 +18,16 @@
 
                 <button id="newAddressBtn" class="w-full bg-gray-300 hover:bg-gray-500 text-gray-700 font-bold py-2 px-4 rounded mb-6">別の住所を入力する</button>
 
+
                 <form id="newAddressForm" action="{{ route('addresses.store') }}" method="POST" style="display:none;">
                     <hr>
                     <div class="text-gray-700 mb-4 text-center text-lg mt-8">新しい住所を入力</div>
                     @csrf
                     @include('components.address-input-form')
                 </form>
+                <a href="{{ route('cart.index') }}" class="relative top-4 bottom-0 left-0 text-gray-700">
+                    戻る
+                </a>
             @else
                 <form action="{{ route('addresses.store') }}" method="POST">
                     @csrf
@@ -32,6 +36,7 @@
             @endif
         </div>
     </div>
+
 
     <script>
         document.getElementById('newAddressBtn').addEventListener('click', function() {
