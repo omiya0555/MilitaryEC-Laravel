@@ -6,8 +6,6 @@
     <p class="text-center text-gray-700 p-5">カートに商品がありません。</p>
     @else
     
-
-    
     <!-- flash message -->
     @include('components/flash')
 
