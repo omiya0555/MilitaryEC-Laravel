@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="container mx-auto mt-12 p-6 m-7" style="padding: 0 5%;"">
+        <p class="flex justify-center text-gray-700 p-5">O R D E R S</p>
+        
         @if($orders->isEmpty())
-            <p class="text-center text-gray-500">購入履歴がありません。</p>
+            <p class="text-center text-gray-500 p-5">購入履歴がありません。</p>
         
         @else
         
-        <p class="flex justify-center text-gray-700 p-5">O R D E R S</p>
-
         <!-- flash message -->
         @include('components/flash')
 

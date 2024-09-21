@@ -1,9 +1,9 @@
 <x-app-layout>
     <script src="js/cart.js"></script>
-    <p class="flex justify-center text-gray-700 mt-12 p-5">C A R T</p>
+    <p class="flex justify-center text-gray-500 mt-12 p-5">C A R T</p>
 
     @if($cartItems->isEmpty())
-    <p class="text-center text-gray-700 p-5">カートに商品がありません。</p>
+    <p class="text-center text-gray-500 p-5">カートに商品がありません。</p>
     @else
     
     <!-- flash message -->
