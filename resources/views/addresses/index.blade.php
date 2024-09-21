@@ -1,59 +1,41 @@
 <x-app-layout>
     <p class="flex justify-center text-gray-700 mt-12 p-5">A D D R E S S</p>
 
-    @if($addresses->isNotEmpty())
-        <form action="" method="POST">
-            @csrf
-            <div>登録済みの住所を選択</div>
-            @foreach($addresses as $address)
-                <div>
-                    <input type="radio" name="address_id" value="{{ $address->id }}" checked>
-                    <label>{{ $address->postal_code }} {{ $address->prefecture }} {{ $address->city }} {{ $address->street_address }} {{ $address->building }}</label>
-                </div>
-            @endforeach
-            <button type="submit">この住所で決済へ進む</button>
-        </form>
-        <button id="newAddressBtn" >別の住所を入力する</button>
+    <div class="flex justify-center mt-8">
+        <div class="w-full max-w-md bg-white shadow-md rounded-lg p-6">
+            @if($addresses->isNotEmpty())
+                <form action="" method="POST" class="mb-6">
+                    @csrf
+                    <div class="text-gray-700 mb-4 text-center text-lg">登録済みの住所を選択</div>
+                    @foreach($addresses as $address)
+                        <div class="mb-4">
+                            <input type="radio" name="address_id" value="{{ $address->id }}" checked class="mr-2">
+                            <label class="text-gray-700">{{ $address->postal_code }} {{ $address->prefecture }} {{ $address->city }} {{ $address->street_address }} {{ $address->building }}</label>
+                        </div>
+                    @endforeach
+                    <button type="submit" class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">この住所で決済へ進む</button>
+                </form>
 
-        <form id="newAddressForm" action="{{ route('addresses.store') }}" method="POST" style="display:none;">
-            @csrf
-            <!-- 新しい住所の入力フォーム -->
-            @include('components.address-input-form')
-        </form>
+                <button id="newAddressBtn" class="w-full bg-gray-300 hover:bg-gray-500 text-gray-700 font-bold py-2 px-4 rounded mb-6">別の住所を入力する</button>
 
-        <script>
-            document.getElementById('newAddressBtn').addEventListener('click', function() {
-                document.getElementById('newAddressForm').style.display = 'block';
-            });
-        </script>
-    @else
-        <!-- 住所が無い場合は新規入力フォームのみを表示 -->
-        <form action="{{ route('addresses.store') }}" method="POST">
-            @csrf
-            @include('components.address-input-form')
-        </form>
-    @endif
+                <form id="newAddressForm" action="{{ route('addresses.store') }}" method="POST" style="display:none;">
+                    <hr>
+                    <div class="text-gray-700 mb-4 text-center text-lg mt-8">新しい住所を入力</div>
+                    @csrf
+                    @include('components.address-input-form')
+                </form>
+            @else
+                <form action="{{ route('addresses.store') }}" method="POST">
+                    @csrf
+                    @include('components.address-input-form')
+                </form>
+            @endif
+        </div>
+    </div>
 
-    
     <script>
-    // 住所APIにリクエスト
-    // 郵便番号から住所を自動取得入力
-    document.getElementById('postal_code').addEventListener('input', function() {
-        let postalCode = this.value.replace('-', '');
-        if (postalCode.length === 7) {
-            fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.results) {
-                    document.getElementById('prefecture').value = data.results[0].address1;
-                    document.getElementById('city').value = data.results[0].address2;
-                    document.getElementById('street_address').value = data.results[0].address3;
-                } else {
-                    alert('住所が見つかりません');
-                }
-            });
-        }
-    });
+        document.getElementById('newAddressBtn').addEventListener('click', function() {
+            document.getElementById('newAddressForm').style.display = 'block';
+        });
     </script>
-
 </x-app-layout>
