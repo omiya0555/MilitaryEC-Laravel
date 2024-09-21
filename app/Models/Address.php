@@ -12,6 +12,11 @@ class Address extends Model
     //fillableを定義
     protected $fillable = [
         'user_id',
+        'postal_code',
+        'prefecture',
+        'city',
+        'street_address',
+        'building',
     ];
 
     public function user()

@@ -14,6 +14,11 @@ class Cart extends Model
         'user_id',
         'product_id',
         'quantity',
+        'postal_code',
+        'prefecture',
+        'city',
+        'street_address',
+        'building',
     ];
 
     //cartに関連するproducts

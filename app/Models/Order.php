@@ -13,6 +13,11 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
+        'postal_code',
+        'prefecture',
+        'city',
+        'street_address',
+        'building',
     ];
 
     public function items()

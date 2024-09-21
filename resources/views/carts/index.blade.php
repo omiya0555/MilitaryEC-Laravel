@@ -3,18 +3,21 @@
     <p class="flex justify-center text-gray-500 mt-12 p-5">C A R T</p>
 
     @if($cartItems->isEmpty())
-    <p class="text-center text-gray-500 p-5">カートに商品がありません。</p>
+    <div>
+        <p class="text-center text-gray-500 p-5">カートに商品がありません。</p>
+        <a href="{{ route('products.index')}}" class="flex justify-center text-green-600 hover:text-green-800 bg-gray-100 w-1/3 mx-auto p-2 rounded-sm">商品を見にいく</a>
+    </div>
     @else
     
     <!-- flash message -->
     @include('components/flash')
 
-    <form action="" method="POST" class="flex justify-center mb-2">
+    <form action="{{ route('addresses.index') }}" method="GET" class="flex justify-center mb-2">
         @csrf
         <div class="flex justify-center">
             <?php $cart_amount = 0; ?>
             <span class="text-xl m-auto mr-4" id="total-amount">合計金額 : {{ $cart_amount }}円</span>
-            <button type="submit" class="border border-green-500 bg-green-500 hover:bg-green-700 text-lg" style="width:140px; height:50px; ">購入</button>
+            <button type="submit" class="border border-green-500 bg-green-500 hover:bg-green-700 text-lg" style="width:140px; height:50px; ">住所選択に進む</button>
         </div>
     </form>
 

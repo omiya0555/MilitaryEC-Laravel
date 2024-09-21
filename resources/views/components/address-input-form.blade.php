@@ -4,6 +4,7 @@
         <input type="text" id="postal_code" name="postal_code" required 
                class="border border-gray-300 focus:border-gray-500 focus:ring-0 rounded-md p-2 w-full">
     </div>
+    <span class="flex justify-end text-gray-600 text-xs mb-4">※郵便番号で住所が自動入力されます。</span>
     <div class="flex items-center">
         <label for="prefecture" class="w-24 text-gray-600">都道府県</label>
         <input type="text" id="prefecture" name="prefecture" required 
@@ -24,12 +25,8 @@
         <input type="text" id="building" name="building" 
                class="border border-gray-300 focus:border-gray-500 focus:ring-0 rounded-md p-2 w-full">
     </div>
-    <div class="flex justify-between">
-        <div class="flex items-center space-x-2">
-            <input type="checkbox" id="save_address" class="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded">
-            <label for="save_address" class="text-gray-600">住所を保存</label>
-        </div>
-        <button type="submit" class="bg-gray-700 text-white rounded-md px-4 py-2 hover:bg-gray-900">新しい住所で決済へ進む</button>
+    <div class="flex justify-end">
+        <button type="submit" class="bg-gray-700 text-white rounded-md px-4 py-2 hover:bg-gray-900">保存</button>
     </div>
 </div>
 

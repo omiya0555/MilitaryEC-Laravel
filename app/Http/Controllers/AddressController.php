@@ -22,6 +22,8 @@ class AddressController extends Controller
     // 決済処理に進む　ボタンに実装
     public function store(Request $request)
     {
+
+    
         $request->validate([
             'postal_code' => 'required|max:8',
             'prefecture' => 'required|string|max:100',
@@ -31,14 +33,15 @@ class AddressController extends Controller
         ]);
 
         Address::create([
+            'postal_code' => $request->postal_code,
+            'prefecture' => $request->prefecture,
+            'city' => $request->city,
+            'street_address' => $request->street_address,
+            'building' => $request->building,
             'user_id' => Auth::id(),
-            'postal_code' => $validatedData['postal_code'],
-            'prefecture' => $validatedData['prefecture'],
-            'city' => $validatedData['city'],
-            'street_address' => $validatedData['street_address'],
-            'building' => $validatedData['building'],
+            
         ]);
 
-        return redirect()->route('purchase.process');
+        return redirect()->route('addresses.index')->with('success', '住所データを保存しました！');;
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -118,14 +119,32 @@ class CartController extends Controller
     {
         $user = Auth::user();
 
-        // Begin a database transaction
+        // ユーザーに関連するカートのアイテムを取得
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        // カートが空の場合はエラーメッセージを返してアドレスページにリダイレクト
+        //　そもそもカートが空ならカートページで購入ページを押せない
+        //　この処理では、購入後に前のページに戻り、アドレスページから空購入を行うパターンを防止する。
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('addresses.index')->with('error', 'カートが空です。商品を追加してください。');
+        }
+
+        // 選択されたアドレスのIDを$requestから受け取り、それをもって住所情報を取得する。
+        $selectedAddress = Address::where('id', $request->address_id)->first();
+
+
+        //トランザクションの開始
         DB::beginTransaction();
 
         try {
             // Create a new order
             $order = Order::create([
-                'user_id'       => $user->id,
-                'total_amount'  => $this->calculateCartTotal($user->id),
+                'user_id'         => $user->id,
+                'total_amount'    => $this->calculateCartTotal($user->id),
+                'postal_code'     => $selectedAddress->postal_code,
+                'prefecture'      => $selectedAddress->prefecture,
+                'city'            => $selectedAddress->city,
+                'street_address'  => $selectedAddress->street_address,
+                'building'        => $selectedAddress->building,
             ]);
 
             // Retrieve all cart items for the user
