@@ -13,12 +13,12 @@
             @endforeach
             <button type="submit">この住所で決済へ進む</button>
         </form>
-        <button id="newAddressBtn">別の住所を入力する</button>
+        <button id="newAddressBtn" >別の住所を入力する</button>
 
         <form id="newAddressForm" action="{{ route('addresses.store') }}" method="POST" style="display:none;">
             @csrf
-            <!-- 新しい住所の入力フォーム（前述の入力フォーム） -->
-            <button type="submit">新しい住所で決済へ進む</button>
+            <!-- 新しい住所の入力フォーム -->
+            @include('components.address-input-form')
         </form>
 
         <script>
@@ -30,8 +30,30 @@
         <!-- 住所が無い場合は新規入力フォームのみを表示 -->
         <form action="{{ route('addresses.store') }}" method="POST">
             @csrf
-            <!-- 新しい住所の入力フォーム（前述の入力フォーム） -->
-            <button type="submit">住所を保存して決済へ進む</button>
+            @include('components.address-input-form')
         </form>
     @endif
+
+    
+    <script>
+    // 住所APIにリクエスト
+    // 郵便番号から住所を自動取得入力
+    document.getElementById('postal_code').addEventListener('input', function() {
+        let postalCode = this.value.replace('-', '');
+        if (postalCode.length === 7) {
+            fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.results) {
+                    document.getElementById('prefecture').value = data.results[0].address1;
+                    document.getElementById('city').value = data.results[0].address2;
+                    document.getElementById('street_address').value = data.results[0].address3;
+                } else {
+                    alert('住所が見つかりません');
+                }
+            });
+        }
+    });
+    </script>
+
 </x-app-layout>
