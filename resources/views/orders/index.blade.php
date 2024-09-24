@@ -17,6 +17,7 @@
                     <tr class="bg-gray-800 text-white text-left">
                         <th class="px-2 py-3">日時</th>
                         <th class="px-2 py-3">合計金額</th>
+                        <th class="px-2 py-2">配送先</th>
                         <th class="px-2 py-3">購入商品</th>
                     </tr>
                 </thead>
@@ -24,7 +25,8 @@
                     @foreach($orders as $order)
                         <tr class="hover:bg-gray-50">
                             <td class="px-2 py-4 text-gray-700 text-sm">{{ $order->created_at->format('Y-m-d') }}</td>
-                            <td class="px-2 py-4 text-gray-900 text-lg font-semibold">{{ number_format($order->total_amount) }}円</td>
+                            <td class="px-2 py-4 text-gray-900">{{ number_format($order->total_amount) }}円</td>
+                            <td class="px-2 py-2 text-gray-900">{{ $order->prefecture }}:{{ $order->city }}</td>
                             <td class="px-2 py-4">
                                 <table class="min-w-full bg-gray-50 border rounded-lg">
                                     <thead>
@@ -33,7 +35,7 @@
                                             <th class="px-2 py-2">商品名</th>
                                             <th class="px-2 py-2">価格</th>
                                             <th class="px-2 py-2">個数</th>
-                                            <th class="px-2 py-2">配送先</th>
+                                            
                                             <th class="px-2 py-2">配送状況</th>
                                         </tr>
                                     </thead>
@@ -46,7 +48,6 @@
                                                 <td class="px-2 py-2 text-gray-700">{{ $item->name }}</td>
                                                 <td class="px-2 py-2 text-gray-900">{{ number_format($item->price) }}円</td>
                                                 <td class="px-2 py-2 text-gray-900">{{ $item->quantity }}</td>
-                                                <td class="px-2 py-2 text-gray-900">{{ $order->prefecture }}:{{ $order->city }}</td>
                                                 <td class="px-2 py-2">
                                                     @switch($order->status)
                                                         @case('pending')

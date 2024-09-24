@@ -9,11 +9,15 @@
                     ✕
                 </button>
                 <h2 class="text-2xl font-bold text-green-600 mb-4">カートに商品を追加しました！</h2>
-                <img id="popup-image" src="/{{ $product->image_path }}" alt="Product Image" class="mx-auto mb-4" style="width: 100px; height: 100px;"/>
+                <img id="popup-image" src="" alt="Product Image" class="mx-auto mb-4" style="width: 100px; height: 100px;"/>
                 <p id="popup-product-name" class="text-gray-700 mb-6"></p>
-                <a href="{{ route('cart.index') }}" class="text-blue-600 font-semibold hover:underline">カートを見に行く</a>
+                <div class="flex justify-between">
+                    <a href="{{ route('cart.index') }}" class="text-gray-600 font-semibold hover:underline">カートを見に行く</a>
+                    <button id="popup-close-link" class="text-gray-600 font-semibold hover:underline">買い物を続ける</button>
+                </div>
             </div>
         </div>
+
         
         <!-- description -->
         <div class="flex justify-center" style="min-width:537px;">
@@ -46,6 +50,7 @@
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const popup = document.getElementById('popup');
         const popupCloseButton = document.getElementById('popup-close');
+        const popupCloseLink = document.getElementById('popup-close-link');
         const popupImage = document.getElementById('popup-image');
         const popupProductName = document.getElementById('popup-product-name');
 
@@ -87,6 +92,9 @@
         });
         // ✕ボタンでポップアップを閉じる
         popupCloseButton.addEventListener('click', function () {
+            popup.classList.add('hidden');
+        });
+        popupCloseLink.addEventListener('click', function () {
             popup.classList.add('hidden');
         });
     });
