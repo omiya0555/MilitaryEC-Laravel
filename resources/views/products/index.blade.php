@@ -14,7 +14,10 @@
                 <h2 class="text-2xl font-bold text-green-600 mb-4">カートに商品を追加しました！</h2>
                 <img id="popup-image" src="" alt="Product Image" class="mx-auto mb-4" style="width: 100px; height: 100px;"/>
                 <p id="popup-product-name" class="text-gray-700 mb-6"></p>
-                <a href="{{ route('cart.index') }}" class="text-blue-600 font-semibold hover:underline">カートを見に行く</a>
+                <div class="flex justify-between">
+                    <a href="{{ route('cart.index') }}" class="text-gray-600 font-semibold hover:underline">カートを見に行く</a>
+                    <button id="popup-close-link" class="text-gray-600 font-semibold hover:underline">買い物を続ける</button>
+                </div>
             </div>
         </div>
 
@@ -35,7 +38,7 @@
                     <div class="flex justify-between p-2">
                         <span class="bg-gray-200 w-15 h-10 p-1 flex justify-center items-center text-sm  text-gray-700">{{ (int)$product->price }}円</span>
                         <button class="w-15 h-10 flex justify-center items-center border border-green-500 bg-green-500 hover:bg-green-700 add-to-cart" data-id="{{ $product->id }}">
-                            <span class="text-white items-center">Add Item</span>
+                            <span class="text-white items-center">カートに追加</span>
                         </button>
                     </div>
                 </div>
@@ -60,7 +63,7 @@
                     <div class="flex justify-between p-2">
                         <span class="bg-gray-200 w-15 h-10 p-1 flex justify-center items-center text-sm  text-gray-700">{{ (int)$product->price }}円</span>
                         <button class="w-15 h-10 p-1 flex justify-center items-center border border-green-500 bg-green-500 hover:bg-green-700 add-to-cart" data-id="{{ $product->id }}">
-                            <span class="text-white items-center">Add Item</span>
+                            <span class="text-white items-center">カートに追加</span>
                         </button>
                     </div>
                 </div>
@@ -80,6 +83,7 @@
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const popup = document.getElementById('popup');
         const popupCloseButton = document.getElementById('popup-close');
+        const popupCloseLink = document.getElementById('popup-close-link');
         const popupImage = document.getElementById('popup-image');
         const popupProductName = document.getElementById('popup-product-name');
 
@@ -122,6 +126,9 @@
         });
         // ✕ボタンでポップアップを閉じる
         popupCloseButton.addEventListener('click', function () {
+            popup.classList.add('hidden');
+        });
+        popupCloseLink.addEventListener('click', function () {
             popup.classList.add('hidden');
         });
     });

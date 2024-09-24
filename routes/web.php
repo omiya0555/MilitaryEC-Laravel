@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{productId}', [CartController::class, 'destroy'])->name('cart.destroy');
     //carts 購入処理
     Route::post('/cart', [CartController::class, 'purchase'])->name('cart.purchase');
+    //carts 決済処理
+    Route::post('/payment', [CartController::class, 'payment'])->name('cart.payment');
     //carts 数量
     Route::post('/cart/{cart}/increase', [CartController::class, 'increase'])->name('cart.increase');
     Route::post('/cart/{cart}/decrease', [CartController::class, 'decrease'])->name('cart.decrease');

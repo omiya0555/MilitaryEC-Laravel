@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cart;
@@ -113,6 +115,47 @@ class CartController extends Controller
         }
         return response()->json(['success' => false]);
     }
+
+
+    // stripe決済のハンドラ
+    public function payment(Request $request)
+    {
+        // シークレットキーの設定
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        try {
+            // PaymentIntentを作成する
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $this->calculateCartTotal(Auth::id()), 
+                'currency' => 'jpy',
+                'payment_method' => $request->input('payment_method_id'),
+                //メソッドの指定は一つであったので、automatic_payment_methodsの追加に伴いコメントアウト
+                //'confirmation_method' => 'manual',
+                'confirm' => true,
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                    'allow_redirects' => 'never',  // リダイレクトを無効にする
+                ],
+            ]);
+            
+            // 決済が成功した場合
+            if ($paymentIntent->status === 'succeeded') {
+                // purchaseメソッドを呼び出す。
+                $this->purchase($request);
+
+                // 購入履歴画面にリダイレクトしする。
+                return redirect()->route('orders.index')->with('success', '決済が完了しました！');
+            } else {
+                // Redirect to addresses page with error message
+                return redirect()->route('addresses.index')->with('error', '決済に失敗しました。');
+            }
+        } catch (\Exception $e) {
+            // Redirect to addresses page in case of an error
+            return redirect()->route('addresses.index')->with('error', 'エラーが発生しました: ' . $e->getMessage());
+        }
+    }
+
+
 
     //カートの商品を購入する処理
     public function purchase(Request $request)
