@@ -125,6 +125,7 @@
             });
         });
         // ✕ボタンでポップアップを閉じる
+        // ！！！冗長なコードー改善の余地あり！！！
         popupCloseButton.addEventListener('click', function () {
             popup.classList.add('hidden');
         });

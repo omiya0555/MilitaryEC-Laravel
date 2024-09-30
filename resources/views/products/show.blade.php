@@ -73,6 +73,7 @@
                 .then(data => {
                     if (data.success) {
                         // 商品の画像と名前をポップアップに表示
+                        // 次回はフロントとバックエンドを分離して、modalを用いて実装したい。
                         popupImage.src = '/'+data.product.image_path;
                         popupProductName.textContent = data.product.name;
                         if(data.product.cart_item_count === 0 ){
